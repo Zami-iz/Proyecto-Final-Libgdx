@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'eclipse'
+}
+
+group = 'com.whereyouat'
+version = '1.0.0'
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+ext {
+    appName = 'Where You At'
+    gdxVersion = '1.13.1'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://oss.sonatype.org/content/repositories/releases/' }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['Whereyouat/src']
+        }
+        resources {
+            srcDirs = ['res']
+        }
+    }
+}
+
+dependencies {
+    implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+    implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+    implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+    implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+}
+
+application {
+    mainClass = 'main.Main'
+}
+
+run {
+    workingDir = project.projectDir
+    ignoreExitValue = true
+}
+
+task copyLibs(type: Copy) {
+    from configurations.runtimeClasspath
+    into 'lib'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+

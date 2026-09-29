@@ -1,25 +1,20 @@
 package main;
 
-import javax.swing.JFrame;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
-public class Main {
+public final class Main {
 
-	public static void main(String[] args) {
-		
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("¿Where you at? - Somewhere out there");
-		
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
-		
-		window.pack();
-		
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
-		
-		
-	}
+    private Main() {}
 
+    public static void main(String[] args) {
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        config.setTitle("Â¿Where You At? - Somewhere Out There");
+        config.setWindowedMode(768, 576);
+        config.setResizable(true);
+        config.useVsync(true);
+        config.setForegroundFPS(60);
+
+        new Lwjgl3Application(new GamePanel(), config);
+    }
 }
